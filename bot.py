@@ -1,7 +1,15 @@
 import logging
 import yaml
+import os, random
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
+# load credentials
+
+credentials = yaml.load(open('credentials.yml'), Loader=yaml.FullLoader)
+token = credentials['token']
+
+img_dir = 'deepfriedmemes'
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -19,12 +27,19 @@ def start(update, context):
 
 def fryme(update, context):
     # sends a random deep fried meme
-    update.message.reply_text('No help he')
+    img = random.choice(os.listdir(img_dir)) #change dir name to whatever
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo = open(img_dir + '/' + img, 'rb'))
 
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    update.message.reply_text('Type /fryme you illiterate fuck.')
+
+
+def bop(update, context):
+    print("reached bop")
+    url = get_image_url()
+    context.bot.send_photo(chat_id=update.effective_chat.id, photo = open(img_dir + '/' + img, 'rb'))
 
 
 def error(update, context):
@@ -37,14 +52,14 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("TOKEN", use_context=True)
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("fryme", fryme))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))

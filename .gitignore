@@ -180,6 +180,6 @@ dmypy.json
 *.code-workspace
 
 ### credentials ###
-credentials.yaml
+credentials.yml
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vscode,python
