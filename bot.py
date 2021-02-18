@@ -6,7 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # load credentials
 
-credentials = yaml.load(open('credentials.yml'), Loader=yaml.FullLoader)
+credentials = yaml.load(open('credentials.yml'), Loader=yaml.SafeLoader)
 token = credentials['token']
 
 img_dir = 'deepfriedmemes'
