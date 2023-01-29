@@ -1,6 +1,7 @@
 import logging
 import yaml
-import os, random
+import os
+import random
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
