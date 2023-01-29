@@ -38,14 +38,6 @@ def echo(update, context):
     update.message.reply_text("Type /fryme you illiterate fuck.")
 
 
-def bop(update, context):
-    print("reached bop")
-    url = get_image_url()
-    context.bot.send_photo(
-        chat_id=update.effective_chat.id, photo=open(img_dir + "/" + img, "rb")
-    )
-
-
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
