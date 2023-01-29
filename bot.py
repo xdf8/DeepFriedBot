@@ -6,14 +6,15 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # load credentials
 
-credentials = yaml.load(open('credentials.yml'), Loader=yaml.SafeLoader)
-token = credentials['token']
+credentials = yaml.load(open("credentials.yml"), Loader=yaml.SafeLoader)
+token = credentials["token"]
 
-img_dir = 'deepfriedmemes'
+img_dir = "deepfriedmemes"
 
 # Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 
 logger = logging.getLogger(__name__)
 
@@ -22,24 +23,28 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Bot initialized.\nType /fryme to continue.')
+    update.message.reply_text("Bot initialized.\nType /fryme to continue.")
 
 
 def fryme(update, context):
     # sends a random deep fried meme
-    img = random.choice(os.listdir(img_dir)) #change dir name to whatever
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo = open(img_dir + '/' + img, 'rb'))
+    img = random.choice(os.listdir(img_dir))  # change dir name to whatever
+    context.bot.send_photo(
+        chat_id=update.effective_chat.id, photo=open(img_dir + "/" + img, "rb")
+    )
 
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text('Type /fryme you illiterate fuck.')
+    update.message.reply_text("Type /fryme you illiterate fuck.")
 
 
 def bop(update, context):
     print("reached bop")
     url = get_image_url()
-    context.bot.send_photo(chat_id=update.effective_chat.id, photo = open(img_dir + '/' + img, 'rb'))
+    context.bot.send_photo(
+        chat_id=update.effective_chat.id, photo=open(img_dir + "/" + img, "rb")
+    )
 
 
 def error(update, context):
@@ -76,5 +81,5 @@ def main():
     updater.idle()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
