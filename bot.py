@@ -34,7 +34,7 @@ def fryme(update, context):
     )
 
 
-def echo(update, context):
+def not_fryme(update, context):
     update.message.reply_text("Type /fryme you illiterate fuck.")
 
 
@@ -57,8 +57,8 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("fryme", fryme))
 
-    # on noncommand i.e message - echo the message on Telegram
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    # on noncommand i.e message - tell user what to do
+    dp.add_handler(MessageHandler(Filters.text, not_fryme))
 
     # log all errors
     dp.add_error_handler(error)
